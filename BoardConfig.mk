@@ -9,6 +9,9 @@ TARGET_KERNEL_CONFIG := cyanogenmod_i8160_defconfig
 # Bluetooth
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/samsung/codina/bluetooth
 
+# Don't Build AOSP Music Player
+NO_MUSIC := true
+
 # Recovery
 TARGET_RECOVERY_FSTAB := device/samsung/codina/rootdir/fstab.samsungcodina
 
