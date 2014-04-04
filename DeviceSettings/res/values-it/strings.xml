@@ -139,8 +139,6 @@
     <!-- SUBCATEGORY: Scheduler -->
     <string name="readaheadkb_dialog_message">Seleziona la readahead buffer size.</string>
     <string name="readaheadkb_title_head">Readahead buffer size</string>
-    <string name="enable_uksm_title_head">Abilita UKSM</string>
-    <string name="enable_uksm_summary_head">Abilita Ultra Kernel SamePage Merging, Miglior gestione della RAM ma più consumo della CPU.</string>
 
     <!-- SUBCATEGORY: MMC -->
     <string name="mmc_subcat_title">MMC</string>
