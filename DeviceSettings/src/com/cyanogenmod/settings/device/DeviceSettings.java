@@ -1,9 +1,9 @@
-package com.teamcanjica.settings.device;
+package com.cyanogenmod.settings.device;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.teamcanjica.settings.device.R;
+import com.cyanogenmod.settings.device.R;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -15,8 +15,8 @@ import android.widget.ListView;
 
 public class DeviceSettings extends Activity implements OnItemClickListener{
 
-	public static final String SHARED_PREFERENCES_BASENAME = "com.teamcanjica.settings.device";
-	public static final String ACTION_UPDATE_PREFERENCES = "com.teamcanjica.settings.device.UPDATE";
+	public static final String SHARED_PREFERENCES_BASENAME = "com.cyanogenmod.settings.device";
+	public static final String ACTION_UPDATE_PREFERENCES = "com.cyanogenmod.settings.device.UPDATE";
 	public static final String KEY_HSPA = "hspa";
 	public static final String KEY_USE_ACCELEROMETER_CALIBRATION = "use_accelerometer_calibration";
 	public static final String KEY_CALIBRATE_ACCELEROMETER = "calibrate_accelerometer";

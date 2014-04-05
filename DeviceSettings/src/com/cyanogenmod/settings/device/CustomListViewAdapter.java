@@ -1,8 +1,8 @@
-package com.teamcanjica.settings.device;
+package com.cyanogenmod.settings.device;
 
 import java.util.List;
-import com.teamcanjica.settings.device.R;
-import com.teamcanjica.settings.device.RowItem;
+import com.cyanogenmod.settings.device.R;
+import com.cyanogenmod.settings.device.RowItem;
 
 import android.app.Activity;
 import android.content.Context;

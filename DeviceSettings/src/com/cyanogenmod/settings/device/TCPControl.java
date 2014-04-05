@@ -14,49 +14,66 @@
  * limitations under the License.
  */
 
-package com.teamcanjica.settings.device;
+package com.cyanogenmod.settings.device;
+
+import java.io.IOException;
 
 import android.content.Context;
-import android.util.AttributeSet;
 import android.content.SharedPreferences;
-import android.preference.Preference;
 import android.preference.ListPreference;
+import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceManager;
+import android.util.AttributeSet;
 
-public class ChargerCurrency extends ListPreference implements
+public class TCPControl extends ListPreference implements
 		OnPreferenceChangeListener {
-
-	public ChargerCurrency(Context context, AttributeSet attrs) {
+	
+	public TCPControl(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		this.setOnPreferenceChangeListener(this);
 	}
-
-	private static final String FILE = "/sys/kernel/abb-charger/max_ac_c";
-
-	public static boolean isSupported() {
-		return Utils.fileExists(FILE);
-	}
-
+	
+	Process process;
+	String newValueString;
+	
+	String[] COMMAND = {
+			"su", "-c",
+			"busybox sysctl -w net.ipv4.tcp_congestion_control=" +
+			newValueString
+		};
+	
 	/**
-	 * Restore currency setting from SharedPreferences. (Write to kernel.)
+	 * Restore TCP Control algorithm from SharedPreferences.
 	 * 
 	 * @param context
 	 *            The context to read the SharedPreferences from
 	 */
-	public static void restore(Context context) {
-		if (!isSupported()) {
-			return;
-		}
-
+	public void restore(Context context) {
 		SharedPreferences sharedPrefs = PreferenceManager
 				.getDefaultSharedPreferences(context);
-		Utils.writeValue(FILE,
-				sharedPrefs.getString(DeviceSettings.KEY_AC_CURRENCY, "600"));
+		newValueString = sharedPrefs.getString(DeviceSettings.KEY_TCP_CONTROL, "cubic");
+		try {
+			process = Runtime.getRuntime().exec(COMMAND);
+			process.waitFor();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 
+	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
-		Utils.writeValue(FILE, (String) newValue);
+		newValueString = (String) newValue;
+		try {
+			process = Runtime.getRuntime().exec(COMMAND);
+			process.waitFor();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		return true;
 	}
 

@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.cyanogenmod.settings.device"
-    android:sharedUserId="android.uid.system"
-    android:versionCode="1"
-    android:versionName="1.0" >
-
-    <uses-sdk android:minSdkVersion="19"
-          android:targetSdkVersion="19"
-          android:maxSdkVersion="19" />
+    android:sharedUserId="android.uid.system" >
 
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" />
@@ -26,19 +20,19 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name="com.teamcanjica.settings.device.Startup">
+        <receiver android:name=".Startup">
             <intent-filter android:priority="100">
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
 
-		<activity android:name="com.teamcanjica.settings.device.ContainerActivity" />
-		<activity android:name="com.teamcanjica.settings.device.NetworkFragmentActivity" />
-		<activity android:name="com.teamcanjica.settings.device.USBFragmentActivity" />
-		<activity android:name="com.teamcanjica.settings.device.AudioFragmentActivity" />
-		<activity android:name="com.teamcanjica.settings.device.ScreenFragmentActivity" />
-		<activity android:name="com.teamcanjica.settings.device.PowermgmtFragmentActivity" />
-		<activity android:name="com.teamcanjica.settings.device.AdvancedFragmentActivity" />
+		<activity android:name=".ContainerActivity" />
+		<activity android:name=".NetworkFragmentActivity" />
+		<activity android:name=".USBFragmentActivity" />
+		<activity android:name=".AudioFragmentActivity" />
+		<activity android:name=".ScreenFragmentActivity" />
+		<activity android:name=".PowermgmtFragmentActivity" />
+		<activity android:name=".AdvancedFragmentActivity" />
         
     </application>
 </manifest>

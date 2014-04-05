@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.teamcanjica.settings.device;
+package com.cyanogenmod.settings.device;
 
-import com.teamcanjica.settings.device.R;
+import com.cyanogenmod.settings.device.R;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -28,21 +28,21 @@ import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.util.Log;
 
-public class PowermgmtFragmentActivity extends PreferenceFragment {
+public class ScreenFragmentActivity extends PreferenceFragment {
 
-	private static final String TAG = "GalaxyAce2_Settings_Advanced";
-
-	private static final String FILE_WIFI_PM = "/sys/module/dhd/parameters/dhdpm_fast";
+	private static final String TAG = "GalaxyAce2_Settings_Screen";
+	
+	public static final String FILE_SWEEP2WAKE = "/sys/kernel/bt404/sweep2wake";
 
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		addPreferencesFromResource(R.xml.powermgmt_preferences);
+		addPreferencesFromResource(R.xml.screen_preferences);
 
-		getActivity().getActionBar().setTitle(getResources().getString(R.string.powermgmt_name));
-		getActivity().getActionBar().setIcon(getResources().getDrawable(R.drawable.powermgmt_icon));
+		getActivity().getActionBar().setTitle(getResources().getString(R.string.screen_name));
+		getActivity().getActionBar().setIcon(getResources().getDrawable(R.drawable.screen_icon));
 	}
 
 	@Override
@@ -54,10 +54,10 @@ public class PowermgmtFragmentActivity extends PreferenceFragment {
 
 		Log.w(TAG, "key: " + key);
 
-		if (key.equals(DeviceSettings.KEY_USE_WIFIPM_MAX)) {
-			boxValue = (((CheckBoxPreference) preference).isChecked() ? "0"
-					: "1");
-			Utils.writeValue(FILE_WIFI_PM, boxValue);
+		if (key.equals(DeviceSettings.KEY_USE_SWEEP2WAKE)) {
+			boxValue = (((CheckBoxPreference) preference).isChecked() ? "on"
+					: "off");
+			Utils.writeValue(FILE_SWEEP2WAKE, boxValue);
 		}
 
 		return true;
@@ -67,9 +67,9 @@ public class PowermgmtFragmentActivity extends PreferenceFragment {
 		SharedPreferences sharedPrefs = PreferenceManager
 				.getDefaultSharedPreferences(context);
 
-		String wifipmvalue = sharedPrefs.getBoolean(
-				DeviceSettings.KEY_USE_WIFIPM_MAX, false) ? "0" : "1";
-		Utils.writeValue(FILE_WIFI_PM, wifipmvalue);
+		String s2wvalue = sharedPrefs.getBoolean(
+				DeviceSettings.KEY_USE_SWEEP2WAKE, false) ? "on" : "off";
+		Utils.writeValue(FILE_SWEEP2WAKE, s2wvalue);
 
 	}
 

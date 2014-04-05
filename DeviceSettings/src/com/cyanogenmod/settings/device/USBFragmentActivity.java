@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.teamcanjica.settings.device;
+package com.cyanogenmod.settings.device;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -25,7 +25,7 @@ import android.preference.PreferenceScreen;
 import android.preference.CheckBoxPreference;
 import android.util.Log;
 
-import com.teamcanjica.settings.device.R;
+import com.cyanogenmod.settings.device.R;
 
 public class USBFragmentActivity extends PreferenceFragment {
 

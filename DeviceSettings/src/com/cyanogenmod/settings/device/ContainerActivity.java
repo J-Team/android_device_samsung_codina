@@ -1,6 +1,6 @@
-package com.teamcanjica.settings.device;
+package com.cyanogenmod.settings.device;
 
-import com.teamcanjica.settings.device.R;
+import com.cyanogenmod.settings.device.R;
 
 import android.app.Activity;
 import android.app.Fragment;

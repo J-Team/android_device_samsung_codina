@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.teamcanjica.settings.device;
+package com.cyanogenmod.settings.device;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -24,15 +24,15 @@ import android.preference.ListPreference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceManager;
 
-public class DeepestSleepState extends ListPreference implements
+public class MaliL2MaxReads extends ListPreference implements
 		OnPreferenceChangeListener {
 
-	public DeepestSleepState(Context context, AttributeSet attrs) {
+	public MaliL2MaxReads(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		this.setOnPreferenceChangeListener(this);
 	}
 
-	private static final String FILE = "/d/cpuidle/deepest_state";
+	private static final String FILE = "/sys/module/mali/parameters/mali_l2_max_reads";
 
 	public static boolean isSupported() {
 		return Utils.fileExists(FILE);
@@ -51,8 +51,8 @@ public class DeepestSleepState extends ListPreference implements
 
 		SharedPreferences sharedPrefs = PreferenceManager
 				.getDefaultSharedPreferences(context);
-		Utils.writeValue(FILE, sharedPrefs.getString(
-				DeviceSettings.KEY_DEEPEST_SLEEP_STATE, "3"));
+		Utils.writeValue(FILE,
+				sharedPrefs.getString(DeviceSettings.KEY_MALI_L2MR, "48"));
 	}
 
 	public boolean onPreferenceChange(Preference preference, Object newValue) {

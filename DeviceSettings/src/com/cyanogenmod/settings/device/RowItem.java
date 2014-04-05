@@ -1,4 +1,4 @@
-package com.teamcanjica.settings.device;
+package com.cyanogenmod.settings.device;
 
 public class RowItem {
     private int imageId;

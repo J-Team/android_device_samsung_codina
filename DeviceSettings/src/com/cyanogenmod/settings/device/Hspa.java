@@ -14,32 +14,34 @@
  * limitations under the License.
  */
 
-package com.teamcanjica.settings.device;
+package com.cyanogenmod.settings.device;
 
 import android.content.Context;
-import android.util.AttributeSet;
+import android.content.Intent;
 import android.content.SharedPreferences;
-import android.preference.Preference;
+import android.util.AttributeSet;
 import android.preference.ListPreference;
+import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceManager;
 
-public class MaliPreAllocMem extends ListPreference implements
-		OnPreferenceChangeListener {
+public class Hspa extends ListPreference implements OnPreferenceChangeListener {
 
-	public MaliPreAllocMem(Context context, AttributeSet attrs) {
+	private static final String FILE = "/system/app/SamsungServiceMode.apk";
+	private Context mCtx;
+
+	public Hspa(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		this.setOnPreferenceChangeListener(this);
+		mCtx = context;
 	}
-
-	private static final String FILE = "/sys/module/mali/parameters/pre_allocated_memory_size_max";
 
 	public static boolean isSupported() {
 		return Utils.fileExists(FILE);
 	}
 
 	/**
-	 * Restore deepest sleep state from SharedPreferences.
+	 * Restore HSPA setting from SharedPreferences. (Write to kernel.)
 	 * 
 	 * @param context
 	 *            The context to read the SharedPreferences from
@@ -51,13 +53,19 @@ public class MaliPreAllocMem extends ListPreference implements
 
 		SharedPreferences sharedPrefs = PreferenceManager
 				.getDefaultSharedPreferences(context);
-		Utils.writeValue(FILE,
-				sharedPrefs.getString(DeviceSettings.KEY_MALI_PAM, "50331648"));
+		sendIntent(context,
+				sharedPrefs.getString(DeviceSettings.KEY_HSPA, "23"));
 	}
 
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
-		Utils.writeValue(FILE, (String) newValue);
+		sendIntent(mCtx, (String) newValue);
 		return true;
 	}
 
+	private static void sendIntent(Context context, String value) {
+		Intent i = new Intent("com.cyanogenmod.SamsungServiceMode.EXECUTE");
+		i.putExtra("sub_type", 20); // HSPA Setting
+		i.putExtra("data", value);
+		context.sendBroadcast(i);
+	}
 }
