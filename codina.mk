@@ -1,9 +1,6 @@
 # Include common makefile
 $(call inherit-product, device/samsung/u8500-common/common.mk)
 
-# Inherit common AOSP stuff
-$(call inherit-product, vendor/aosp/config/common.mk)
-
 # For better compatibility with ROMs (like Slim, PAC)
 $(call inherit-product, vendor/samsung/u8500-common/codina/codina-vendor-blobs.mk)
 
