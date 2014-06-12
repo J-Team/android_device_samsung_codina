@@ -28,3 +28,7 @@ PRODUCT_COPY_FILES += \
 # Gps
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/gps.conf:system/etc/gps.conf
+
+# Storage switch
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.sys.vold.switchablepair=sdcard0,sdcard1
